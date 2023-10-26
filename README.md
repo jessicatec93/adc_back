@@ -62,9 +62,9 @@ In order to ensure that the Laravel community is welcoming to all, please review
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## Requirements
-PHP 8.2.4
-Composer 2.6.5
-Laravel 10.29.0
+- PHP 8.2.4
+- Composer 2.6.5
+- Laravel 10.29.0
 
 ## ENV
 You need to fill .env
