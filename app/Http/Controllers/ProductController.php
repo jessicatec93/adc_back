@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
+use App\Models\ProductModel;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -32,10 +34,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         try{
-            return  $this->service->create();
+            $data = $request->validated();
+            return  $this->service->create($data);
         } catch(\Exception $e){
             return ['error'=> $e->getMessage()];
         }
@@ -44,10 +47,10 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ProductModel $product)
     {
         try{
-            return  $this->service->getOne();
+            return  $this->service->getOne($product);
         } catch(\Exception $e){
             return ['error'=> $e->getMessage()];
         }
@@ -57,10 +60,11 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductModel $product, ProductRequest $request)
     {
         try{
-            return  $this->service->update();
+            $data = $request->validated();
+            return  $this->service->update($product, $data);
         } catch(\Exception $e){
             return ['error'=> $e->getMessage()];
         }
@@ -69,10 +73,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ProductModel $product)
     {
         try{
-            return  $this->service->delete();
+            return  $this->service->delete($product);
         } catch(\Exception $e){
             return ['error'=> $e->getMessage()];
         }
