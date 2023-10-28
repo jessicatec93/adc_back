@@ -8,6 +8,7 @@ use App\Models\ProductModel;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductListResource;
+use App\Filters\ProductFilters;
 use Exception;
 
 class ProductController extends Controller
@@ -24,10 +25,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProductFilters $filter)
     {
         try{
-            return  ProductListResource::collection($this->service->getList())->response()->getData(true);
+            return  ProductListResource::collection($this->service->getList($filter))->response()->getData(true);
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }

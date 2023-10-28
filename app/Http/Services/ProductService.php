@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Filters\ProductFilters;
 use App\Models\ProductModel;
 use Illuminate\Support\Carbon;
 
@@ -10,9 +11,9 @@ class ProductService
     /**
      * Display a listing of the resource.
     */
-    public function getList(Int $limit = 5)
+    public function getList(ProductFilters $filter, Int $limit = 5)
     {
-        return ProductModel::select('*')->paginate($limit);
+        return ProductModel::select('*')->filter($filter)->paginate($limit);
     }
 
     /**
