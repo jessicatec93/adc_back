@@ -42,7 +42,8 @@ class ProductController extends Controller
     {
         try{
             $data = $request->validated();
-            return  $this->service->create($data);
+            $response = $this->service->create($data);
+            return response()->json(['data' => $response], 201);
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
@@ -68,7 +69,8 @@ class ProductController extends Controller
     {
         try{
             $data = $request->validated();
-            return  $this->service->update($product, $data);
+            $response = $this->service->update($product, $data);
+            return response()->json(['data' => $response], 200);
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
@@ -80,7 +82,8 @@ class ProductController extends Controller
     public function destroy(ProductModel $product)
     {
         try{
-            return  $this->service->delete($product);
+            $response = $this->service->delete($product);
+            return response()->json(['data' => $response], 200);
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
