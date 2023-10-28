@@ -43,7 +43,6 @@ class ProductModel extends Model
         'price_per_unit'      =>  'float',
         'created_at'          =>  'datetime:Y-m-d H:m:s',
         'updated_at'          =>  'datetime:Y-m-d H:m:s',
-        'deleted_at'          =>  'datetime:Y-m-d H:m:s',
     ];
 
     public function classification(): HasOne

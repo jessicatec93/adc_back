@@ -47,11 +47,9 @@ class ProductService
     */
     public function delete(ProductModel $product)
     {
-        $data = [
-            'active'        => false,
-            'deleted_by'    => 1,
-            'deleted_at'    => Carbon::now()
-        ];
-        return tap($product)->update($data);
+        $product->timestamps = false;
+        $product->deleted_by = 1;
+        $product->deleted_at = Carbon::now();
+        return $product->save();
     }
 }
