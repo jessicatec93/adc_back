@@ -53,6 +53,7 @@ class ProductService
         $product->timestamps = false;
         $product->deleted_by = 1;
         $product->deleted_at = Carbon::now();
+        $product->active = false;
         $product->save();
         return ['id'=> $product->id];
     }
