@@ -25,10 +25,10 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductFilters $filter)
+    public function index(ProductFilters $filters)
     {
         try{
-            return  ProductListResource::collection($this->service->getList($filter))->response()->getData(true);
+            return  ProductListResource::collection($this->service->getList($filters));
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
