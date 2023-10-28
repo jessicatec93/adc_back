@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Services\ProductService;
 use App\Models\ProductModel;
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
+use App\Http\Resources\ProductListResource;
+use Exception;
 
 class ProductController extends Controller
 {
@@ -24,8 +27,8 @@ class ProductController extends Controller
     public function index()
     {
         try{
-            return  $this->service->getList();
-        } catch(\Exception $e){
+            return  ProductListResource::collection($this->service->getList())->response()->getData(true);
+        } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
     }
@@ -39,7 +42,7 @@ class ProductController extends Controller
         try{
             $data = $request->validated();
             return  $this->service->create($data);
-        } catch(\Exception $e){
+        } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
     }
@@ -50,8 +53,8 @@ class ProductController extends Controller
     public function show(ProductModel $product)
     {
         try{
-            return  $this->service->getOne($product);
-        } catch(\Exception $e){
+            return  ProductResource::make($this->service->getOne($product));
+        } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
     }
@@ -65,7 +68,7 @@ class ProductController extends Controller
         try{
             $data = $request->validated();
             return  $this->service->update($product, $data);
-        } catch(\Exception $e){
+        } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
     }
@@ -77,7 +80,7 @@ class ProductController extends Controller
     {
         try{
             return  $this->service->delete($product);
-        } catch(\Exception $e){
+        } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }
     }

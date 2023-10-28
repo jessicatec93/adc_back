@@ -10,9 +10,9 @@ class ProductService
     /**
      * Display a listing of the resource.
     */
-    public function getList()
+    public function getList(Int $limit = 5)
     {
-        return ProductModel::select('*')->get()->toArray();
+        return ProductModel::select('*')->paginate($limit);
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductService
         $data['created_by'] = 1;
         $product = new ProductModel($data);
         $product->save();
-        return $product;
+        return ['id' => $product->id];
     }
 
     /**
@@ -39,7 +39,8 @@ class ProductService
     */
     public function update(ProductModel $product, $data)
     {
-        return tap($product)->update($data);
+        tap($product)->update($data);
+        return ['id' => $product->id];
     }
 
     /**
@@ -50,6 +51,7 @@ class ProductService
         $product->timestamps = false;
         $product->deleted_by = 1;
         $product->deleted_at = Carbon::now();
-        return $product->save();
+        $product->save();
+        return ['id'=> $product->id];
     }
 }
