@@ -11,8 +11,9 @@ class ProductService
     /**
      * Display a listing of the resource.
     */
-    public function getList(ProductFilters $filter, Int $limit = 5)
+    public function getList(ProductFilters $filter)
     {
+        $limit = $filter->request->limit ?? 5;
         return ProductModel::select('*')->filter($filter)->paginate($limit);
     }
 
