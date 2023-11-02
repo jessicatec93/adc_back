@@ -11,7 +11,7 @@ class ClassificationsModel extends Model
 {
     use HasFactory, SoftDeletes, Filterable;
 
-    protected $table = 'classifications';
+    protected $table = 'cat_classifications';
 
     /**
      * The attributes that are mass assignable.

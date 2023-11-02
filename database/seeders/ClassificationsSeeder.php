@@ -13,7 +13,7 @@ class ClassificationsSeeder extends Seeder
      */
     public function run(): void
     {
-        if(DB::table('classifications')->count() == 0){
+        if(DB::table('cat_classifications')->count() == 0){
             $records = [
                 [
                     'id'           => 1,
@@ -37,7 +37,7 @@ class ClassificationsSeeder extends Seeder
                     'created_at'   => '2023-10-26T07:00:29+00:00',
                 ]
             ];
-            DB::table('classifications')->insert($records);
+            DB::table('cat_classifications')->insert($records);
         }
     }
 }

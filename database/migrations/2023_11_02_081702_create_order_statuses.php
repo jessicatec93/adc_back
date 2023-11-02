@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cat_classifications', function (Blueprint $table) {
+        Schema::create('cat_order_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cat_classifications');
+        Schema::dropIfExists('cat_order_statuses');
     }
 };
