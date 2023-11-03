@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
             'name'              => 'required|string',
             'description'       => 'nullable|string',
             'price_per_unit'    => 'required|numeric|gte:0',
-            'classification_id' => 'required|integer|exists:classifications,id',
+            'classification_id' => 'required|integer|exists:cat_classifications,id',
             'expiration_at'     => 'required|date',
             'storage'           => 'nullable|integer|gte:0',
         ];

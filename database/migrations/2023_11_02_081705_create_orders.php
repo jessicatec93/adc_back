@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-
-            //$table->string('name')->unique();
-            //$table->decimal('price_per_unit', 18, 4);
-
-            
-            $table->timestamp('delivery_at'); 
+            $table->string('folio');
+            $table->timestamp('delivery_at')->nullable();
+            $table->timestamp('deadline_at'); 
             $table->string('description')->nullable();
+            $table->decimal('price_per_unit', 18, 4);
+            $table->decimal('total_price', 18, 4);
             $table->integer('required_quantity');
+            $table->boolean('active')->default(true);
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('created_by');
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
             
             $table->foreign('status_id')->references('id')->on('cat_order_statuses');
             $table->foreign('created_by')->references('id')->on('users');

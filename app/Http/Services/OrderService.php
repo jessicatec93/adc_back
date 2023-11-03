@@ -2,27 +2,27 @@
 
 namespace App\Http\Services;
 
-use App\Filters\ProductFilters;
-use App\Models\ProductModel;
+use App\Filters\OrderFilters;
+use App\Models\OrderModel;
 use Illuminate\Support\Carbon;
 
 class OrderService
 {
-    /**
+        /**
      * Display a listing of the resource.
     */
-    public function getList(ProductFilters $filter)
+    public function getList(OrderFilters $filter)
     {
         $limit = $filter->request->limit ?? 5;
-        return ProductModel::select('*')->filter($filter)->paginate($limit);
+        return OrderModel::select('*')->filter($filter)->paginate($limit);
     }
 
     /**
      * Display a listing of the resource.
     */
-    public function getOne(ProductModel $product)
+    public function getOne(OrderModel $order)
     {
-        return $product->load(['classification', 'creator']);
+        return $order->load(['product', 'status', 'creator', 'updater']);
     }
 
     /**
@@ -31,30 +31,32 @@ class OrderService
     public function create($data)
     {
         $data['created_by'] = 1;
-        $product = new ProductModel($data);
-        $product->save();
-        return ['id' => $product->id];
+        $order = new OrderModel($data);
+        $order->folio = $order->getfolio();
+        $order->save();
+        return ['id' => $order->id];
     }
 
     /**
      * Display a listing of the resource.
     */
-    public function update(ProductModel $product, $data)
+    public function update(OrderModel $order, $data)
     {
-        tap($product)->update($data);
-        return ['id' => $product->id];
+        $data['updated_by'] = 1;
+        tap($order)->update($data);
+        return ['id' => $order->id];
     }
 
     /**
      * Display a listing of the resource.
     */
-    public function delete(ProductModel $product)
+    public function delete(OrderModel $order)
     {
-        $product->timestamps = false;
-        $product->deleted_by = 1;
-        $product->deleted_at = Carbon::now();
-        $product->active = false;
-        $product->save();
-        return ['id'=> $product->id];
+        $order->timestamps = false;
+        $order->deleted_by = 1;
+        $order->deleted_at = Carbon::now();
+        $order->active = false;
+        $order->save();
+        return ['id'=> $order->id];
     }
 }

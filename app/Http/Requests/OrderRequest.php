@@ -22,7 +22,14 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'delivery_at'        => 'nullable|date',
+            'deadline_at'        => 'required|date',
+            'description'        => 'nullable|string',
+            'price_per_unit'     => 'required|numeric|gte:0',
+            'total_price'        => 'required|numeric|gte:0',
+            'required_quantity'  => 'nullable|integer|gte:0',
+            'status_id'          => 'required|integer|exists:cat_order_statuses,id',
+            'product_id'         => 'required|integer|exists:products,id',
         ];
     }
 }

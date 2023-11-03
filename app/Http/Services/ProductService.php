@@ -22,7 +22,7 @@ class ProductService
     */
     public function getOne(ProductModel $product)
     {
-        return $product->load(['classification', 'creator']);
+        return $product->load(['classification', 'creator', 'updater']);
     }
 
     /**
@@ -32,6 +32,7 @@ class ProductService
     {
         $data['created_by'] = 1;
         $product = new ProductModel($data);
+        $product->folio = $product->getfolio();
         $product->save();
         return ['id' => $product->id];
     }
@@ -41,6 +42,7 @@ class ProductService
     */
     public function update(ProductModel $product, $data)
     {
+        $data['updated_by'] = 1;
         tap($product)->update($data);
         return ['id' => $product->id];
     }

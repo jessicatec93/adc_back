@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('folio');
             $table->string('description')->nullable();
             $table->decimal('price_per_unit', 18, 4);
             $table->unsignedBigInteger('classification_id');

@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class ProductModel extends Model
+class OrderModel extends Model
 {
     use HasFactory, SoftDeletes, Filterable;
 
-    protected $table = 'products';
+    protected $table = 'orders';
 
-    protected $PREFIX = 'P';
+    protected $PREFIX = 'O';
 
     /**
      * The attributes that are mass assignable.
@@ -22,14 +22,16 @@ class ProductModel extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'folio',
+        'delivery_at',
+        'deadline_at',
+        'active',
         'description',
         'price_per_unit',
-        'classification_id',
-        'expiration_at',
-        'storage',
-        'active',
+        'total_price',
+        'required_quantity',
+        'status_id',
+        'product_id',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -41,16 +43,23 @@ class ProductModel extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'expiration_at'       =>  'datetime:Y-m-d H:m:s',
-        'storage'             =>  'integer',
+        'delivery_at'         =>  'datetime:Y-m-d H:m:s',
+        'deadline_at'         =>  'datetime:Y-m-d H:m:s',
+        'required_quantity'   =>  'integer',
         'price_per_unit'      =>  'float',
+        'total_price'         =>  'float',
         'created_at'          =>  'datetime:Y-m-d H:m:s',
         'updated_at'          =>  'datetime:Y-m-d H:m:s',
     ];
 
-    public function classification(): HasOne
+    public function product(): HasOne
     {
-        return $this->hasOne(ClassificationsModel::class, 'id', 'classification_id');
+        return $this->hasOne(ProductModel::class, 'id', 'product_id');
+    }
+
+    public function status(): HasOne
+    {
+        return $this->hasOne(OrderStatusModel::class, 'id', 'status_id');
     }
 
     public function creator(): HasOne
