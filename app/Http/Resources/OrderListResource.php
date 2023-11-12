@@ -20,9 +20,9 @@ class OrderListResource extends JsonResource
             'active'        => $this->active,
             'deadline_at'   => $this->deadline_at,
             'delivery_at'   => $this->delivery_at,
-            'status_id'     => $this->status_id,
             'created_at'    => $this->created_at,
             'total_price'   => $this->total_price,
+            'status'        => OrderStatusResource::make($this->status),
         ];
     }
 }

@@ -14,7 +14,7 @@ class OrderService
     public function getList(OrderFilters $filter)
     {
         $limit = $filter->request->limit ?? 5;
-        return OrderModel::select('*')->filter($filter)->paginate($limit);
+        return OrderModel::select('*')->with('status')->filter($filter)->paginate($limit);
     }
 
     /**
