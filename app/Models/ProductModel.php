@@ -30,6 +30,7 @@ class ProductModel extends Model
         'expiration_at',
         'storage',
         'active',
+        'min_amount',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -43,6 +44,7 @@ class ProductModel extends Model
     protected $casts = [
         'expiration_at'       =>  'datetime:Y-m-d H:m:s',
         'storage'             =>  'integer',
+        'min_amount'          =>  'integer',
         'price_per_unit'      =>  'float',
         'created_at'          =>  'datetime:Y-m-d H:m:s',
         'updated_at'          =>  'datetime:Y-m-d H:m:s',

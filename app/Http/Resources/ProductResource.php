@@ -27,6 +27,7 @@ class ProductResource extends JsonResource
             'active'            => $this->active,
             'created_at'        => $this->created_at,
             'updated_at'        => $this->updated_at,
+            'min_amount'        => $this->min_amount,
             'classification'    => ClassificationResource::make($this->classification),
             'creator'           => UserResource::make($this->creator),
             'updater'           => UserResource::make($this->updater),

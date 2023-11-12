@@ -21,7 +21,8 @@ class ProductListResource extends JsonResource
             'expiration_at'     => $this->expiration_at,
             'storage'           => $this->storage,
             'active'            => $this->active,
-            'created_at'        => $this->created_at
+            'created_at'        => $this->created_at,
+            'min_amount'        => $this->min_amount,
         ];
     }
 }

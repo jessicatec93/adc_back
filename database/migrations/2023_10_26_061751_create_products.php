@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('classification_id');
             $table->timestamp('expiration_at'); 
             $table->integer('storage')->default(0);
+            $table->integer('min_amount')->default(0);
             $table->boolean('active')->default(true);
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable();

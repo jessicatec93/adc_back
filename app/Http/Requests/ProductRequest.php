@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
             'classification_id' => 'required|integer|exists:cat_classifications,id',
             'expiration_at'     => 'required|date',
             'storage'           => 'nullable|integer|gte:0',
+            'min_amount'        => 'required|integer|gte:0',
         ];
     }
 }
