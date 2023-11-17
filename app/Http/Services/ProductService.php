@@ -34,7 +34,7 @@ class ProductService
         $product = new ProductModel($data);
         $product->folio = $product->getfolio();
         $product->save();
-        return ['id' => $product->id];
+        return ['folio' => $product->folio];
     }
 
     /**
@@ -44,7 +44,7 @@ class ProductService
     {
         $data['updated_by'] = 1;
         tap($product)->update($data);
-        return ['id' => $product->id];
+        return ['folio' => $product->folio];
     }
 
     /**
@@ -57,6 +57,6 @@ class ProductService
         $product->deleted_at = Carbon::now();
         $product->active = false;
         $product->save();
-        return ['id'=> $product->id];
+        return ['folio'=> $product->folio];
     }
 }

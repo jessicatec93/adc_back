@@ -34,7 +34,7 @@ class OrderService
         $order = new OrderModel($data);
         $order->folio = $order->getfolio();
         $order->save();
-        return ['id' => $order->id];
+        return ['folio' => $order->folio];
     }
 
     /**
@@ -44,7 +44,7 @@ class OrderService
     {
         $data['updated_by'] = 1;
         tap($order)->update($data);
-        return ['id' => $order->id];
+        return ['folio' => $order->folio];
     }
 
     /**
@@ -57,6 +57,6 @@ class OrderService
         $order->deleted_at = Carbon::now();
         $order->active = false;
         $order->save();
-        return ['id'=> $order->id];
+        return ['folio'=> $order->folio];
     }
 }
