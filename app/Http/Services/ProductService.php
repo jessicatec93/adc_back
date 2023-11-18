@@ -17,6 +17,14 @@ class ProductService
         return ProductModel::select('*')->filter($filter)->paginate($limit);
     }
 
+        /**
+     * Display a listing of the resource.
+    */
+    public function getListResum(ProductFilters $filter)
+    {
+        return ProductModel::select('*')->filter($filter)->get();
+    }
+
     /**
      * Display a listing of the resource.
     */

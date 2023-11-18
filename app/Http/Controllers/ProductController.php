@@ -8,6 +8,7 @@ use App\Models\ProductModel;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ProductListResource;
+use App\Http\Resources\ProductListResumResource;
 use App\Filters\ProductFilters;
 use Exception;
 
@@ -84,6 +85,18 @@ class ProductController extends Controller
         try{
             $response = $this->service->delete($product);
             return response()->json(['data' => $response], 200);
+        } catch(Exception $e){
+            return ['error'=> $e->getMessage()];
+        }
+    }
+
+    /**
+     * Display a listing of the resum resource.
+     */
+    public function list(ProductFilters $filters)
+    {
+        try{
+            return  ProductListResumResource::collection($this->service->getListResum($filters));
         } catch(Exception $e){
             return ['error'=> $e->getMessage()];
         }

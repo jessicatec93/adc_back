@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |
 */
 Route::resource('/products', ProductController::class);
+Route::get('/products-list', [ProductController::class, 'list']);
 Route::resource('/classifications', ClassificationController::class);
 Route::resource('/orders', OrderController::class);
 Route::resource('/order-statuses', OrderStatusController::class);
-
