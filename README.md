@@ -72,6 +72,7 @@ You need to fill .env
 ## Install
 ```
 $ composer install
+$ composer update --ignore-platform-req=ext-fileinfo
 ```
 
 ## Migration
